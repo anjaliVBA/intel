@@ -1,0 +1,143 @@
+
+public class PowerUsageData {
+    private double voltage;
+    private double current;
+    private long timestamp;
+
+    public PowerUsageData(double voltage, double current, long timestamp) {
+        this.voltage = voltage;
+        this.current = current;
+        this.timestamp = timestamp;
+    }
+
+    public double getVoltage() {
+        return voltage;
+    }
+
+    public double getCurrent() {
+        return current;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public double getPower() {
+        return voltage * current;
+    }
+
+    @Override
+    public String toString() {
+        return "PowerUsageData{" +
+                "voltage=" + voltage +
+                ", current=" + current +
+                ", timestamp=" + timestamp +
+                ", power=" + getPower() +
+                '}';
+    }
+}
+
+
+
+import java.util.Random;
+
+public class PowerDataCollector {
+    private Random random = new Random();
+
+    public PowerUsageData collectData() {
+        double voltage = 220 + random.nextGaussian() * 5; // Simulated voltage around 220V
+        double current = 10 + random.nextGaussian() * 2;  // Simulated current around 10A
+        long timestamp = System.currentTimeMillis();
+
+        return new PowerUsageData(voltage, current, timestamp);
+    }
+}
+
+
+public class PowerManagementTelemetry {
+    public static void main(String[] args) {
+        PowerDataCollector collector = new PowerDataCollector();
+        PowerDataManager manager = new PowerDataManager();
+
+        // Simulate data collection over a period of time
+        for (int i = 0; i < 10; i++) {
+            PowerUsageData data = collector.collectData();
+            manager.logData(data);
+
+            // Print the collected data
+            System.out.println(data);
+
+            // Simulate a delay between data collection
+            try {
+                Thread.sleep(1000); // 1 second delay
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Print the entire data log
+        System.out.println("\nData Log:");
+        for (PowerUsageData data : manager.getDataLog()) {
+            System.out.println(data);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class PowerManagementTelemetry {
+    public static void main(String[] args) {
+        PowerDataCollector collector = new PowerDataCollector();
+        PowerDataManager manager = new PowerDataManager();
+
+        // Simulate data collection over a period of time
+        for (int i = 0; i < 10; i++) {
+            PowerUsageData data = collector.collectData();
+            manager.logData(data);
+
+            // Print the collected data
+            System.out.println(data);
+
+            // Simulate a delay between data collection
+            try {
+                Thread.sleep(1000); // 1 second delay
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Print the entire data log
+        System.out.println("\nData Log:");
+        for (PowerUsageData data : manager.getDataLog()) {
+            System.out.println(data);
+        }
+    }
+}
+
